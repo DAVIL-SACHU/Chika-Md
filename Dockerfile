@@ -1,9 +1,5 @@
 FROM node:lts-buster
 
-RUN git clone https://github.com/DAVIL-SACHU/Chika-Md /root/AlienAlfa
-
-WORKDIR /root/AlienAlfa/
-
 RUN apt-get update && \
   apt-get install -y \
   ffmpeg \
@@ -11,11 +7,13 @@ RUN apt-get update && \
   webp && \
   apt-get upgrade -y && \
   rm -rf /var/lib/apt/lists/*
-  
-RUN npm install -g npm@8.9.0
 
-RUN yarn install --no-audit
+COPY package.json .
 
-RUN npm i -g heroku
+RUN npm install && npm install qrcode-terminal && npm install pm2 -g 
+
+COPY . .
+
+EXPOSE 5000
 
 CMD ["node", "riy.js"]
