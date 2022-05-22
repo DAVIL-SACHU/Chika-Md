@@ -18,4 +18,4 @@ RUN yarn install --no-audit
 
 RUN npm i -g heroku
 
-CMD ["node", "index.js"]
+CMD ["node", "riy.js"]
